@@ -7,7 +7,7 @@ function main(argv) {
         commands = require('../commands');
 
     if (!command) {
-        console.error('Usage: ki <command> <options> <args>');
+        console.error('Usage: kj <command> <options> <args>');
         return;
     }
 

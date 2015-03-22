@@ -30,7 +30,7 @@ function init(app, config, log, working) {
             working: working,
         });
 
-    config.ki.parsers.forEach(function(name) {
+    config.kj.parsers.forEach(function(name) {
         var parser = parsers[name];
         if (parser) {
             log.debug('Running parser configurator:', name);

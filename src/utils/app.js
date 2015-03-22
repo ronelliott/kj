@@ -3,7 +3,7 @@
 var goa = require('goa');
 
 function make(config, factory) {
-    return goa(factory, config.ki.goa);
+    return goa(factory, config.kj.goa);
 }
 
 module.exports = {

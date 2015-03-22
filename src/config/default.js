@@ -16,9 +16,9 @@ module.exports = {
         options: {},
     },
 
-    // you probably shouldn't change any ki configuration unless you know what you're doing
-    ki: {
-        // relative to ki.configurators
+    // you probably shouldn't change any kj configuration unless you know what you're doing
+    kj: {
+        // relative to kj.configurators
         configurators: [
             'session', // important that it's before csrf
             'csrf',

@@ -49,7 +49,7 @@ function init(config, working, caller, container) {
     }
 
     var controllers = require('../controllers').get(working),
-        app = makeApp(config, config.ki.controllers.factory || factory(controllers)),
+        app = makeApp(config, config.kj.controllers.factory || factory(controllers)),
         configurators = require('../configurators').get(working);
 
     container.registerInstance(app, 'app');
@@ -77,7 +77,7 @@ function init(config, working, caller, container) {
     container.registerInstance(put(app), 'put');
 
     // load the project files
-    config.ki.project.files.forEach(function(sub) {
+    config.kj.project.files.forEach(function(sub) {
         try {
             var modulePath = path.join(working, sub),
                 module = require(modulePath);

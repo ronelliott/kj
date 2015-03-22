@@ -33,7 +33,7 @@ function init(app, config, log, working, configurators) {
         });
 
 
-    config.ki.configurators.forEach(function(name) {
+    config.kj.configurators.forEach(function(name) {
         var configurator = configurators[name];
         if (configurator) {
             log.debug('Running configurator:', name);
