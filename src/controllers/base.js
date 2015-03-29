@@ -45,7 +45,17 @@ BaseController.prototype = {
 
         validation.validate(values, validation.object().keys(validations), function(err, values) {
             if (err) {
-                throw new Error('Unable to validate inputs: ' + err);
+                self.log.error(err.toString());
+                var errors = (err.details || []).map(function(detail) {
+                    return {
+                        field: detail.path,
+                        message: detail.message,
+                    };
+                });
+                json({
+                    errors: errors,
+                }, http.status.BAD_REQUEST);
+                return;
             }
 
             var items = self.getResolutions(params, {

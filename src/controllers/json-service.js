@@ -25,7 +25,9 @@ JSONServiceController.prototype = extend({}, ServiceController.prototype, {
         function handler(params, json) {
             function callback(err, data) {
                 if (err) {
-                    json({ message: 'Something bad happened!', status: 500 });
+                    var errors = err.errors || [ { message: err.toString().replace(/^(E|e)rror(:\s*)?/, '') } ],
+                        status = err.status || 500;
+                    json({ errors: errors }, status);
                     return;
                 }
 
