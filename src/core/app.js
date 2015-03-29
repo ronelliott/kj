@@ -61,6 +61,7 @@ function init(config, working, caller, container) {
 
     // run the logging configurator
     var logger = caller(configurators.logging.init);
+    container.registerInstance(logger, 'logger');
 
     log = logger.get('app');
     container.registerInstance(log, 'log');
