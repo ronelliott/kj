@@ -1,14 +1,10 @@
 'use strict';
 
-var winston = require('winston'),
-    utils = require('./'),
+var utils = require('./'),
     inject = utils.inject;
 
-function get(name) {
-    return winston.loggers.get(name);
-}
-
-function init(config) {
+function init(config, winston) {
+    winston = winston || require('winston');
     Object.keys(config).forEach(function(name) {
         winston.loggers.add(name, config[name]);
     });
@@ -39,7 +35,6 @@ function middleware(config, log) {
 }
 
 module.exports = {
-    get:         get,
     init:        init,
     middleware:  middleware,
 };

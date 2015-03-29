@@ -3,7 +3,6 @@
 var utils = require('../utils'),
     makeApp = utils.app.make,
     inject = utils.inject,
-    logger = utils.logger,
     path = utils.path;
 
 function get(app) {
@@ -61,7 +60,7 @@ function init(config, working, caller, container) {
     container.registerInstance(configurators, 'configurators');
 
     // run the logging configurator
-    caller(configurators.logging.init);
+    var logger = caller(configurators.logging.init);
 
     log = logger.get('app');
     container.registerInstance(log, 'log');
