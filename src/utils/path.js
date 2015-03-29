@@ -12,7 +12,7 @@ function children(base) {
 }
 
 function exists(location) {
-    return fs.exists.apply(this, arguments);
+    return fs.existsSync.apply(this, arguments);
 }
 
 function join(location) {
