@@ -5,6 +5,7 @@
     'app',
     'colors',
     'extend',
+    'http',
     'inherits',
     'inject',
     'load',
