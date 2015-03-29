@@ -3,11 +3,13 @@
 var utils = require('../utils'),
     app = utils.app,
     extend = utils.extend,
+    http = utils.http,
     inject = utils.inject,
     validation = utils.validation;
 
 function BaseController(context) {
     this.context = context;
+    this.log = context.log;
 }
 
 BaseController.prototype = {

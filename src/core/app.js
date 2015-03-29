@@ -31,6 +31,8 @@ function put(app) {
 }
 
 function init(config, working, caller, container) {
+    var log;
+
     function factory(controllers) {
         return function factory(name, context, callback) {
             name = name || 'BaseController';
@@ -43,6 +45,8 @@ function init(config, working, caller, container) {
             }
 
             context.container = container;
+            context.config = config;
+            context.log = log;
             context.working = working;
             callback(null, new Controller(context));
         };
@@ -59,7 +63,7 @@ function init(config, working, caller, container) {
     // run the logging configurator
     caller(configurators.logging.init);
 
-    var log = logger.get('app');
+    log = logger.get('app');
     container.registerInstance(log, 'log');
     log.debug('Using working path:', working);
 
