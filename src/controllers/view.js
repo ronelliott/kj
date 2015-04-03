@@ -13,7 +13,7 @@ inherits(ViewController, BaseController);
 
 ViewController.prototype = extend({}, BaseController.prototype, {
     getContext: function(params) {
-        return params.context || {};
+        return params.context || this.context || {};
     },
 
     render: function(params, render) {
