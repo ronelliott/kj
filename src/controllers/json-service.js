@@ -25,9 +25,9 @@ JSONServiceController.prototype = extend({}, ServiceController.prototype, {
         function handler(params, json) {
             function callback(err, data) {
                 if (err) {
-                    var errors = err.errors || [ { message: err.toString().replace(/^(E|e)rror(:\s*)?/, '') } ],
-                        status = err.status || 500;
-                    json({ errors: errors }, status);
+                    var errors = err.message ? [ err.message ] : err.errors || [ 'Internal Server Error' ],
+                        error = { errors: errors };
+                    json(error, err.status || 500);
                     return;
                 }
 
@@ -35,7 +35,11 @@ JSONServiceController.prototype = extend({}, ServiceController.prototype, {
             }
 
             var items = extend(true, {}, { callback: callback }, values);
-            inject.call(method, items, service);
+            try {
+                inject.call(method, items, service);
+            } catch(e) {
+                callback(e);
+            }
         }
 
         return handler;
