@@ -27,7 +27,7 @@ function middleware(config, log) {
                     url: req.url,
                 });
 
-            log[config.level](logStr);
+            log[typeof(config.level) === 'function' ? config.level(req, res) : config.level](logStr);
         });
 
         next();
