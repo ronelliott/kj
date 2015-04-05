@@ -34,7 +34,10 @@ JSONServiceController.prototype = extend({}, ServiceController.prototype, {
                 json(data);
             }
 
-            var items = extend(true, {}, { callback: callback }, values);
+            var items = extend(true, {}, {
+                callback: callback,
+                values: values,
+            }, values);
             try {
                 inject.call(method, items, service);
             } catch(e) {
