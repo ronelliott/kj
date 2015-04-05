@@ -10,6 +10,7 @@
     'inject',
     'load',
     'logger',
+    'postgres',
     'redis',
     'validation',
 ].forEach(function(moduleName) {

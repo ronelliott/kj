@@ -7,13 +7,14 @@ var utils = require('../utils'),
 [
     'base',
     'cache',
+    'postgres',
     'redis',
 ].forEach(function(moduleName) {
     module.exports = extend(module.exports, require('./' + moduleName));
 });
 
 function get(working) {
-    return load(working, 'services');
+    return load(working, 'repositories');
 }
 
 module.exports.get = get;
