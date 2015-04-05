@@ -6,6 +6,7 @@ var utils = require('../utils'),
 
 [
     'base',
+    'crud',
 ].forEach(function(moduleName) {
     module.exports = extend(module.exports, require('./' + moduleName));
 });
