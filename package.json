@@ -1,49 +1,34 @@
 {
   "name": "kj",
-  "version": "0.0.9",
+  "version": "0.1.0",
   "description": "WebApp Framework",
-  "main": "index.js",
+  "main": "lib.js",
   "author": "Ron Elliott <ron@elliott.im>",
   "license": "ISC",
   "repository": "https://github.com/ronelliott/kj",
-  "bin": "./src/bin/kj.js",
+  "bin": "bin.js",
   "keywords": [
     "webapp",
     "framework"
   ],
   "scripts": {
-    "test": "mocha --growl"
+    "test": "mocha --reporter dot"
   },
   "devDependencies": {
-    "grunt-cli": "^0.1.13",
-    "mocha": "^2.1.0",
-    "proxyquire": "^1.3.1",
-    "should": "^4.6.5",
-    "sinon": "^1.12.2"
-  },
-  "optionalDependencies": {
-    "hiredis": "^0.2.0",
-    "pg": "^4.3.0",
-    "redis": "^0.12.1",
-    "squel": "^3.10.0"
+    "mocha": "^2.2.4",
+    "proxyquire": "^1.4.0",
+    "should": "^6.0.1",
+    "sinon": "^1.14.1"
   },
   "dependencies": {
-    "body-parser": "^1.11.0",
-    "chalk": "^0.5.1",
-    "connect-multiparty": "^1.2.5",
-    "cookie-parser": "^1.3.3",
-    "csurf": "^1.6.6",
-    "ejs": "^2.3.1",
-    "express": "^4.10.7",
-    "express-session": "^1.10.2",
-    "extend": "^2.0.0",
-    "goa": "^1.2.0",
-    "helmet": "^0.6.0",
+    "async": "^0.9.0",
+    "express": "^4.12.3",
+    "extend": "^2.0.1",
+    "goa": "^1.3.1",
     "http-status": "^0.1.8",
-    "joi": "^6.0.8",
-    "minimist": "^1.1.0",
-    "reflekt": "^0.1.8",
-    "sahara": "^1.2.0",
-    "winston": "^0.9.0"
+    "joi": "^6.4.1",
+    "minimist": "^1.1.1",
+    "reflekt": "^0.1.10",
+    "yaml": "^0.2.3"
   }
 }
