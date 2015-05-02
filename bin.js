@@ -3,13 +3,14 @@
 'use strict';
 
 var async = require('async'),
+    extend = require('extend'),
     kj = require('./lib'),
-    options = require('minimist')(process.argv.slice(2)),
+    argv = require('minimist')(process.argv.slice(2)),
     config;
 
 async.eachSeries([
-    options.config,
-    options._[0],
+    argv.config,
+    argv._[0],
     './config.js',
     './config.json',
     './config.yml',
@@ -30,6 +31,7 @@ async.eachSeries([
             next(err);
         }
 
+        console.log('using config:', name);
         config = loaded;
         next();
     });
@@ -39,10 +41,13 @@ async.eachSeries([
         return;
     }
 
-    kj.app.start(config, options, function(err, app) {
+    console.log('starting server');
+    kj.app.start(argv, config || {}, function(err, app) {
         if (err) {
             console.error(err);
             return;
         }
+
+        console.log('server started on :%s', app.get('port'));
     });
 });
