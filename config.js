@@ -9,7 +9,8 @@ module.exports = {
         'events',
         'repositories',
         'routes',
-        'services'
+        'services',
+        'init'
     ],
     goa: {
         options: {
@@ -41,5 +42,14 @@ module.exports = {
             // see https://github.com/expressjs/body-parser/blob/master/README.md
             options: {}
         }
+    },
+    static: {
+        enabled: true,
+        path: 'public',
+        url: '/static'
+    },
+    views: {
+        enabled: false,
+        engine: null
     }
 };
