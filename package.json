@@ -1,6 +1,6 @@
 {
   "name": "kj",
-  "version": "0.1.0",
+  "version": "0.1.1",
   "description": "WebApp Framework",
   "main": "lib/index.js",
   "author": "Ron Elliott <ron@elliott.im>",
