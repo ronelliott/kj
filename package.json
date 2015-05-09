@@ -32,6 +32,8 @@
     "minimist": "^1.1.1",
     "reflekt": "^0.1.12",
     "require-directory": "^2.1.0",
+    "simple-fmt": "^0.1.0",
+    "winston": "^1.0.0",
     "yaml": "^0.2.3"
   }
 }

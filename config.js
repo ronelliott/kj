@@ -21,6 +21,29 @@ module.exports = {
         enabled: false,
         options: {}
     },
+    logging: {
+        enabled: true,
+        app: {
+            logger: 'app'
+        },
+        http: {
+            format: '{method} - {status} - {duration}ms - {path}',
+            level: 'debug',
+            logger: 'http'
+        },
+        loggers: {
+            app: {
+                console: {
+                    level: 'debug'
+                }
+            },
+            http: {
+                console: {
+                    level: 'debug'
+                }
+            }
+        }
+    },
     parsers: {
         json: {
             enabled: false,
@@ -44,7 +67,7 @@ module.exports = {
         }
     },
     static: {
-        enabled: true,
+        enabled: false,
         path: 'public',
         url: '/static'
     },

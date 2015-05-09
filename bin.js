@@ -14,13 +14,14 @@ kj.config.get(function(err, config, name, configPath) {
     }
 
     console.log('using config:', configPath);
-    console.log('starting server');
-    kj.app.start(argv, config, function(err, app) {
+    kj.app.start(argv, config, function(err, app, log) {
+        log = log || { error: console.error, info: console.log };
+
         if (err) {
-            console.error(err);
+            log.error(err);
             return;
         }
 
-        console.log('server started on :%s', app.get('port'));
+        log.info('server started on :%s', app.get('port'));
     });
 });
