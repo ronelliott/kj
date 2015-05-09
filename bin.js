@@ -5,44 +5,17 @@
 var async = require('async'),
     extend = require('extend'),
     kj = require('./lib'),
-    argv = require('minimist')(process.argv.slice(2)),
-    config;
+    argv = require('minimist')(process.argv.slice(2));
 
-async.eachSeries([
-    argv.config,
-    argv._[0],
-    './config.js',
-    './config.json',
-    './config.yml',
-    './config.yaml'
-], function(name, next) {
-    if (config || !name) {
-        next();
-        return;
-    }
-
-    kj.config.get(name, function(err, loaded) {
-        if (err) {
-            if (!err.exists) {
-                next();
-                return;
-            }
-
-            next(err);
-        }
-
-        console.log('using config:', name);
-        config = loaded;
-        next();
-    });
-}, function(err) {
+kj.config.get(function(err, config, name, configPath) {
     if (err) {
         console.error(err);
         return;
     }
 
+    console.log('using config:', configPath);
     console.log('starting server');
-    kj.app.start(argv, config || {}, function(err, app) {
+    kj.app.start(argv, config, function(err, app) {
         if (err) {
             console.error(err);
             return;
