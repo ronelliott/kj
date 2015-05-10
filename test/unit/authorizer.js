@@ -1,6 +1,7 @@
 'use strict';
 
-var Authorizer = require('../../lib/authorizer');
+var should = require('should'),
+    Authorizer = require('../../lib/authorizer').Authorizer;
 
 describe('Authorizer', function() {
     beforeEach(function() {
@@ -11,7 +12,7 @@ describe('Authorizer', function() {
         it('should call the callback with an error if authorizers do not exist for the given permission', function(done) {
             this.authorizer.can('ducks', function(err) {
                 err.should.be.ok;
-                err.should.have.property('notRegistered', ['ducks']);
+                err.should.have.property('notRegistered', 'ducks');
                 done();
             });
         });

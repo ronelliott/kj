@@ -17,10 +17,6 @@ module.exports = {
             defaultAction: 'handle'
         }
     },
-    helmet: {
-        enabled: false,
-        options: {}
-    },
     logging: {
         enabled: true,
         app: {
