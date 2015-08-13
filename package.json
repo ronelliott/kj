@@ -22,7 +22,7 @@
     "is": "^3.0.1",
     "methods": "^1.1.1",
     "path-to-regexp": "^1.2.0",
-    "reflekt": "^0.3.5"
+    "reflekt": "^0.3.6"
   },
   "devDependencies": {
     "coveralls": "^2.11.4",
