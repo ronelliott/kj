@@ -10,7 +10,7 @@ describe('add', function() {
         this.router = new Router();
     });
 
-    it('should add routes correctly', function() {
+    it('should add single handler routes correctly', function() {
         var h1 = sinon.spy(),
             h2 = sinon.spy();
 
@@ -38,6 +38,27 @@ describe('add', function() {
             keys: [],
             method: 'get',
             path: '/foo'
+        }]);
+    });
+
+    it('should add multi handler routes correctly', function() {
+        var h1 = sinon.spy(),
+            h2 = sinon.spy();
+
+        this.router.add('GET', '/', h1, h2);
+
+        this.router.routes.should.eql([{
+            exp: pathToRegexp('/', []),
+            handler: h1,
+            keys: [],
+            method: 'get',
+            path: '/'
+        }, {
+            exp: pathToRegexp('/', []),
+            handler: h2,
+            keys: [],
+            method: 'get',
+            path: '/'
         }]);
     });
 });
