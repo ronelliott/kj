@@ -21,7 +21,7 @@
     "http-status": "^0.2.0",
     "is": "^3.0.1",
     "methods": "^1.1.1",
-    "path-to-regexp": "^1.2.0",
+    "path-to-regexp": "^1.2.1",
     "reflekt": "^0.3.6"
   },
   "devDependencies": {
@@ -29,7 +29,7 @@
     "istanbul": "^0.3.17",
     "mocha": "^2.2.5",
     "proxyquire": "^1.6.0",
-    "should": "^7.0.3",
+    "should": "^7.0.4",
     "sinon": "^1.15.4"
   }
 }
