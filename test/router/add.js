@@ -61,4 +61,21 @@ describe('add', function() {
             path: '/'
         }]);
     });
+
+    it('should allow overriding options', function() {
+        var h1 = sinon.spy();
+
+        this.router.add('GET', {
+            end: false,
+            url: '/'
+        }, h1);
+
+        this.router.routes.should.eql([{
+            exp: pathToRegexp('/', [], { end: false }),
+            handler: h1,
+            keys: [],
+            method: 'get',
+            path: '/'
+        }]);
+    });
 });
