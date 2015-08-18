@@ -163,13 +163,11 @@ describe('handle', function() {
     });
 
     it('should emit a `request:slow` signal if the slow option is set to an integer', function(done) {
-        this.timeout(10000);
-
         var called = false,
-            h1 = function(next) { called = true; setTimeout(next, 250); },
+            h1 = function(next) { called = true; setTimeout(next, 150); },
             fired = sinon.spy();
 
-        this.app.slow = 100;
+        this.app.slow = 50;
         this.app.get('/', h1);
         this.app.on('request:slow', fired);
         this.app.handle(this.req, this.res, function() {
@@ -180,10 +178,8 @@ describe('handle', function() {
     });
 
     it('should not emit a `request:slow` signal if the slow option is set to null', function(done) {
-        this.timeout(10000);
-
         var called = false,
-            h1 = function(next) { called = true; setTimeout(next, 250); },
+            h1 = function(next) { called = true; setTimeout(next, 150); },
             fired = sinon.spy();
 
         this.app.slow = null;
@@ -194,5 +190,43 @@ describe('handle', function() {
             called.should.equal(true);
             done();
         });
+    });
+
+    it('should clear the slow handler timeout if the response is closed', function(done) {
+        var called = false,
+            h1 = function(next) { called = true; setTimeout(next, 150); },
+            fired = sinon.spy(),
+            res = new EventEmitter();
+
+        res.end = sinon.spy(function() { res.emit('finish'); });
+        res.write = sinon.spy();
+        this.app.slow = 50;
+        this.app.get('/', h1);
+        this.app.on('request:slow', fired);
+        this.app.handle(this.req, res, function() {
+            fired.called.should.equal(false);
+            called.should.equal(true);
+            done();
+        });
+        res.emit('close');
+    });
+
+    it('should clear the slow handler timeout if the response is finished', function(done) {
+        var called = false,
+            h1 = function(next) { called = true; setTimeout(next, 150); },
+            fired = sinon.spy(),
+            res = new EventEmitter();
+
+        res.end = sinon.spy(function() { res.emit('finish'); });
+        res.write = sinon.spy();
+        this.app.slow = 50;
+        this.app.get('/', h1);
+        this.app.on('request:slow', fired);
+        this.app.handle(this.req, res, function() {
+            fired.called.should.equal(false);
+            called.should.equal(true);
+            done();
+        });
+        res.emit('finish');
     });
 });
