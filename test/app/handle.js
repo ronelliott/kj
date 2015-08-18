@@ -1,6 +1,7 @@
 'use strict';
 
 var App = require('../../lib/app'),
+    EventEmitter = require('events').EventEmitter,
     should = require('should'),
     sinon = require('sinon');
 
@@ -99,6 +100,17 @@ describe('handle', function() {
         var h1 = sinon.spy();
 
         this.app.caller.resolver.add('foo', h1);
+        this.app.get('/', 'foo');
+        this.app.handle(this.req, this.res, function() {
+            h1.called.should.equal(true);
+            done();
+        });
+    });
+
+    it('should resolve the handler if it is an object', function(done) {
+        var h1 = sinon.spy();
+
+        this.app.caller.resolver.add('foo', h1);
         this.app.get('/', { handler: 'foo' });
         this.app.handle(this.req, this.res, function() {
             h1.called.should.equal(true);
@@ -118,6 +130,68 @@ describe('handle', function() {
         this.app.get('/', { handler: 'foo' });
         this.app.handle(this.req, this.res, function(err) {
             err.toString().should.equal('Error: Undefined handler: {"handler":"foo"}');
+            done();
+        });
+    });
+
+    it('should emit a `request:begin` signal at the start of the request', function(done) {
+        var h1 = sinon.spy(),
+            fired = sinon.spy(function() { h1.called.should.equal(false); });
+
+        this.app.use(h1);
+        this.app.on('request:begin', fired);
+        this.app.handle(this.req, this.res, function() {
+            fired.called.should.equal(true);
+            h1.called.should.equal(true);
+            done();
+        });
+    });
+
+    it('should emit a `request:end` signal at the end of the request', function(done) {
+        var h1 = sinon.spy(),
+            fired = sinon.spy(function() { h1.called.should.equal(true); }),
+            res = new EventEmitter();
+
+        res.end = sinon.spy(function() { res.emit('finish'); });
+        res.write = sinon.spy();
+        this.app.use(h1);
+        this.app.on('request:end', fired);
+        this.app.handle(this.req, res, function() {
+            fired.called.should.equal(true);
+            done();
+        });
+    });
+
+    it('should emit a `request:slow` signal if the slow option is set to an integer', function(done) {
+        this.timeout(10000);
+
+        var called = false,
+            h1 = function(next) { called = true; setTimeout(next, 250); },
+            fired = sinon.spy();
+
+        this.app.slow = 100;
+        this.app.get('/', h1);
+        this.app.on('request:slow', fired);
+        this.app.handle(this.req, this.res, function() {
+            fired.called.should.equal(true);
+            called.should.equal(true);
+            done();
+        });
+    });
+
+    it('should not emit a `request:slow` signal if the slow option is set to null', function(done) {
+        this.timeout(10000);
+
+        var called = false,
+            h1 = function(next) { called = true; setTimeout(next, 250); },
+            fired = sinon.spy();
+
+        this.app.slow = null;
+        this.app.get('/', h1);
+        this.app.on('request:slow', fired);
+        this.app.handle(this.req, this.res, function() {
+            fired.called.should.equal(false);
+            called.should.equal(true);
             done();
         });
     });
