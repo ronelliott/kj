@@ -84,18 +84,6 @@ describe('handle', function() {
         });
     });
 
-    it('should add a context to the request', function(done) {
-        var called = false,
-            h1 = function(ctx) { called = true; ctx.add('foo', 'bar'); };
-
-        this.app.get('/', h1);
-        this.app.handle(this.req, this.res, function(ctx) {
-            ctx('foo').should.equal('bar');
-            called.should.equal(true);
-            done();
-        });
-    });
-
     it('should resolve the handler if it is a string', function(done) {
         var h1 = sinon.spy();
 
