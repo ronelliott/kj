@@ -1,6 +1,7 @@
 'use strict';
 
 var App = require('../../lib/app'),
+    path = require('path'),
     should = require('should'),
     sinon = require('sinon');
 
@@ -35,7 +36,7 @@ describe('initialize', function() {
     });
 
     it('should try to import modules passed as strings', function(done) {
-        this.app.initialize([ 'test/app/spy' ], function(err) {
+        this.app.initialize([ path.join(__dirname, 'spy') ], function(err) {
             should(err).not.be.ok();
             done();
         });
@@ -44,13 +45,13 @@ describe('initialize', function() {
     it('should throw an exception if it cannot import a module', function() {
         var self = this;
         (function() {
-            self.app.initialize([ 'test/app/spy2' ]);
+            self.app.initialize([ path.join(__dirname, 'spy2') ]);
         }).should.throw(/Cannot find module/);
     });
 
     it('should call the function imported', function(done) {
         var self = this;
-        this.app.initialize([ 'test/app/spy' ], function(err) {
+        this.app.initialize([ path.join(__dirname, 'spy') ], function(err) {
             should(err).not.be.ok();
             self.app.caller.resolver('iz in ur resolver').should.equal(true);
             done();

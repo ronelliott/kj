@@ -3,7 +3,7 @@
 describe('Router', function() {
     [
         './add',
-        './handle',
+        './matches',
         './remove',
         './unuse',
         './use'

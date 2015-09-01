@@ -2,6 +2,8 @@
 
 [
     './app',
+    './error',
+    './factory',
     './request',
     './response',
     './router'
