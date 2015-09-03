@@ -2,6 +2,7 @@
 
 describe('App', function() {
     [
+        './events',
         './handle',
         './initialize',
         './proxies',
