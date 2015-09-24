@@ -26,4 +26,14 @@ describe('header', function() {
         this.res.header('foo', 'bar');
         this.setHeader.calledWith('foo', 'bar').should.equal(true);
     });
+
+    it('should set the header value if a value is given and is an array', function() {
+        this.res.header([ 'foo', 'bar' ]);
+        this.setHeader.calledWith('foo', 'bar').should.equal(true);
+    });
+
+    it('should set the header value if a value is given and is an object', function() {
+        this.res.header({ name: 'foo', value: 'bar' });
+        this.setHeader.calledWith('foo', 'bar').should.equal(true);
+    });
 });
