@@ -14,24 +14,26 @@ describe('resolving', function() {
             return self.h1;
         });
 
-        this.caller = reflekt.caller({ foo: this.factory });
+        this.$resolver = new reflekt.ObjectResolver({ foo: this.factory });
+        this.$$resolver = new reflekt.ObjectResolver();
+        this.caller = reflekt.caller(this.$resolver);
     });
 
     it('should resolve the handler if it is a string', function() {
         var opts = 'foo',
-            result = factory(this.caller, opts);
+            result = factory(this.caller, opts, this.$$resolver, this.$resolver);
         result.should.equal(this.h1);
     });
 
     it('should use the property `handler` if the given options is an object', function() {
         var opts = { handler: this.factory },
-            result = factory(this.caller, opts);
+            result = factory(this.caller, opts, this.$$resolver, this.$resolver);
         result.should.equal(this.h1);
     });
 
     it('should resolve the handler if it is an object and the `handler` property is defined as a string', function() {
         var opts = { handler: 'foo' },
-            result = factory(this.caller, opts);
+            result = factory(this.caller, opts, this.$$resolver, this.$resolver);
         result.should.equal(this.h1);
     });
 });

@@ -4,6 +4,7 @@ describe('Response', function() {
     [
         './end',
         './header',
+        './headers',
         './json',
         './redirect',
         './status'

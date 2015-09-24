@@ -49,14 +49,6 @@ describe('handle', function() {
         });
     });
 
-    it('should produce an error if the handler is not defined in the route', function(done) {
-        this.app.get('/', null);
-        this.app.handle(this.req, this.res, function(err) {
-            err.toString().should.equal('Error: Undefined handler for route: /');
-            done();
-        });
-    });
-
     it('should emit a `request:begin` signal at the start of the request', function(done) {
         var h1 = sinon.spy(),
             fired = sinon.spy(function() { h1.called.should.equal(false); });
@@ -101,59 +93,59 @@ describe('handle', function() {
         });
     });
 
-    //it('should not emit a `request:slow` signal if the slow option is set to null', function(done) {
-    //    var self = this,
-    //        called = false,
-    //        h1 = function($next) { called = true; setTimeout($next, self.slowDelay); },
-    //        fired = sinon.spy();
-    //
-    //    this.app.slow = null;
-    //    this.app.get('/', h1);
-    //    this.app.on('request:slow', fired);
-    //    this.app.handle(this.req, this.res, function() {
-    //        fired.called.should.equal(false);
-    //        called.should.equal(true);
-    //        done();
-    //    });
-    //});
+    it('should not emit a `request:slow` signal if the slow option is set to null', function(done) {
+        var self = this,
+            called = false,
+            h1 = function($next) { called = true; setTimeout($next, self.slowDelay); },
+            fired = sinon.spy();
 
-    //it('should clear the slow handler timeout if the response is closed', function(done) {
-    //    var self = this,
-    //        called = false,
-    //        h1 = function($next) { called = true; setTimeout($next, self.slowDelay); },
-    //        fired = sinon.spy(),
-    //        res = new EventEmitter();
-    //
-    //    res.end = sinon.spy(function() { res.emit('finish'); });
-    //    res.write = sinon.spy();
-    //    this.app.slow = this.slowValue;
-    //    this.app.get('/', h1);
-    //    this.app.on('request:slow', fired);
-    //    this.app.handle(this.req, res, function() {
-    //        fired.called.should.equal(false);
-    //        called.should.equal(true);
-    //        done();
-    //    });
-    //    res.emit('close');
-    //});
+        this.app.slow = null;
+        this.app.get('/', h1);
+        this.app.on('request:slow', fired);
+        this.app.handle(this.req, this.res, function() {
+            fired.called.should.equal(false);
+            called.should.equal(true);
+            done();
+        });
+    });
 
-    //it('should clear the slow handler timeout if the response is finished', function(done) {
-    //    var self = this,
-    //        called = false,
-    //        h1 = function($next) { called = true; setTimeout($next, self.slowDelay); },
-    //        fired = sinon.spy(),
-    //        res = new EventEmitter();
-    //
-    //    res.end = sinon.spy(function() { res.emit('finish'); });
-    //    res.write = sinon.spy();
-    //    this.app.slow = this.slowValue;
-    //    this.app.get('/', h1);
-    //    this.app.on('request:slow', fired);
-    //    this.app.handle(this.req, res, function() {
-    //        fired.called.should.equal(false);
-    //        called.should.equal(true);
-    //        done();
-    //    });
-    //    res.emit('finish');
-    //});
+    it('should clear the slow handler timeout if the response is closed', function(done) {
+        var self = this,
+            called = false,
+            h1 = function($next) { called = true; setTimeout($next, self.slowDelay); },
+            fired = sinon.spy(),
+            res = new EventEmitter();
+
+        res.end = sinon.spy(function() { res.emit('finish'); });
+        res.write = sinon.spy();
+        this.app.slow = this.slowValue;
+        this.app.get('/', h1);
+        this.app.on('request:slow', fired);
+        this.app.handle(this.req, res, function() {
+            fired.called.should.equal(false);
+            called.should.equal(true);
+            done();
+        });
+        res.emit('close');
+    });
+
+    it('should clear the slow handler timeout if the response is finished', function(done) {
+        var self = this,
+            called = false,
+            h1 = function($next) { called = true; setTimeout($next, self.slowDelay); },
+            fired = sinon.spy(),
+            res = new EventEmitter();
+
+        res.end = sinon.spy(function() { res.emit('finish'); });
+        res.write = sinon.spy();
+        this.app.slow = this.slowValue;
+        this.app.get('/', h1);
+        this.app.on('request:slow', fired);
+        this.app.handle(this.req, res, function() {
+            fired.called.should.equal(false);
+            called.should.equal(true);
+            done();
+        });
+        res.emit('finish');
+    });
 });
