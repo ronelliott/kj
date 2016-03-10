@@ -3,7 +3,7 @@
   "version": "0.4.3",
   "main": "lib",
   "description": "WebApp Framework",
-  "author": "Ron Elliott <ron@elliott.im>",
+  "author": "Ron Elliott <ronaldbelliott@gmail.com>",
   "license": "ISC",
   "repository": "https://github.com/ronelliott/kj",
   "keywords": [
