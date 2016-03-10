@@ -13,8 +13,15 @@ Install using [NPM](https://github.com/isaacs/npm):
     npm install kj --save
 
 
-## Examples
+## Yeoman Generator
+A basic yeoman generator exists. To install:
 
+    npm install -g generator-kj
+
+For more information see: [https://github.com/ronelliott/generator-kj](https://github.com/ronelliott/generator-kj)
+
+
+## Examples
 Some example sites built using kj:
 
 * Markdown powered blog: [https://github.com/ronelliott/kj-examples-blog](https://github.com/ronelliott/kj-examples-blog)
