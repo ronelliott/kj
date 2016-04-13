@@ -16,11 +16,10 @@
     "test:coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec"
   },
   "dependencies": {
-    "async": "^1.4.2",
-    "extend": "^3.0.0",
-    "http-status": "^0.2.0",
-    "is": "^3.0.1",
-    "methods": "^1.1.1",
+    "async": "^1.5.2",
+    "http-status": "^0.2.1",
+    "is": "^3.1.0",
+    "methods": "^1.1.2",
     "path-to-regexp": "^1.2.1",
     "reflekt": "^0.3.9"
   },
