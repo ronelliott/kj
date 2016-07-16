@@ -16,19 +16,19 @@
     "test:coverage": "istanbul cover ./node_modules/mocha/bin/_mocha --report lcovonly -- -R spec"
   },
   "dependencies": {
-    "async": "^1.5.2",
-    "http-status": "^0.2.1",
+    "async": "^2.0.0",
+    "http-status": "^0.2.3",
     "is": "^3.1.0",
     "methods": "^1.1.2",
-    "path-to-regexp": "^1.2.1",
+    "path-to-regexp": "^1.5.3",
     "reflekt": "^0.3.9"
   },
   "devDependencies": {
-    "coveralls": "^2.11.9",
+    "coveralls": "^2.11.11",
     "istanbul": "^0.4.3",
-    "mocha": "^2.4.5",
-    "proxyquire": "^1.7.4",
-    "should": "^8.3.0",
-    "sinon": "^1.17.3"
+    "mocha": "^3.0.0-1",
+    "proxyquire": "^1.7.10",
+    "should": "^9.0.2",
+    "sinon": "^2.0.0-pre.2"
   }
 }
