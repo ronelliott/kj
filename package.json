@@ -25,7 +25,7 @@
   },
   "devDependencies": {
     "coveralls": "^2.11.11",
-    "istanbul": "^0.4.3",
+    "istanbul": "^1.1.0-alpha.1",
     "mocha": "^3.0.0-1",
     "proxyquire": "^1.7.10",
     "should": "^9.0.2",
