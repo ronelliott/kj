@@ -10,6 +10,18 @@ describe('initialize', function() {
         this.app = new App();
     });
 
+    it('should allow arrays of functions to be passed', function(done) {
+        var spy1 = sinon.spy(),
+            spy2 = sinon.spy();
+
+        this.app.initialize([ [ spy1, spy2 ] ], function(err) {
+            should(err).not.be.ok();
+            spy1.called.should.equal(true);
+            spy2.called.should.equal(true);
+            done();
+        });
+    });
+
     it('should allow functions to be passed directly', function(done) {
         var spy1 = sinon.spy(),
             spy2 = sinon.spy();
